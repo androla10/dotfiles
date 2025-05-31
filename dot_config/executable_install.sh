@@ -14,8 +14,8 @@ ${PATH_CONFIG}/install_sdkman.sh || {
 }
 
 #Execute script instalation of zap 
-${PATH_CONFIG}/install_zap.sh || {
-	echo "Ocurred error when executed script instalation of install_zap.sh. Please check file $LOG_FILE for more information"
-}
+#${PATH_CONFIG}/install_zap.sh || {
+	#echo "Ocurred error when executed script instalation of install_zap.sh. Please check file $LOG_FILE for more information"
+#}
 
 [ -s $LOG_FILE ] || rm $LOG_FILE 
