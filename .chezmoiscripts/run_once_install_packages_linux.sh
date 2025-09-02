@@ -1,6 +1,4 @@
 
-{{ if eq .chezmoi.os "linux" }}
-
 #!/bin/sh
 echo "Instalando paquetes en Linux..."
 
@@ -17,9 +15,3 @@ brew bundle --file=~/.private/Brewfile
 
 #Execute Script Install other applications
 $HOME/.scripts/install.sh
-
-{{ end }}
-
-{{ if eq .chezmoi.os "windows" }}
-# No hacer nada en Windows (aquí deberías usar un .ps1 mejor)
-{{ end }}
