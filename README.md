@@ -11,7 +11,7 @@ Con un solo comando puedes clonar y aplicar mis dotfiles en una nueva máquina.
 
 ### Windows
 ```powershell
-iwr -useb https://raw.githubusercontent.com/$env:GITHUB_USERNAME/dotfiles/main/bootstrap.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/$env:GITHUB_USERNAME/dotfiles/main/bootstrap.ps1 | Invoke-Expression
 ```
 
 ### Linux / macOS
