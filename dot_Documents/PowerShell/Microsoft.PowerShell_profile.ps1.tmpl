@@ -1,0 +1,12 @@
+{{ if eq .chezmoi.os "windows" }}
+# Perfil de PowerShell para Windows
+Write-Output "Ejecutando setup para Windows..."
+
+# Alias útiles
+Set-Alias ll Get-ChildItem
+Set-Alias gs git status
+
+# Variables de entorno
+$env:EDITOR = "nvim"
+
+{{ end }}

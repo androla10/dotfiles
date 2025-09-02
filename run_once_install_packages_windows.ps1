@@ -1,0 +1,4 @@
+# Configuración para Windows
+Write-Output "Ejecutando setup para Windows..."
+# Crear directorio de trabajo
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\tools"
