@@ -7,6 +7,14 @@ if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
     Write-Output "Scoop ya está instalado."
 }
 
+# Verificar si git está instalado
+if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Output "Instalando git con Scoop..."
+    scoop install git
+} else {
+    Write-Output "git ya se encuentra instalado."
+}
+
 # Actualizar scoop antes de instalar
 scoop update
 

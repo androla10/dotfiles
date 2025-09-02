@@ -1,6 +1,12 @@
-#!/bin/sh
 
+{{ if eq .chezmoi.os "linux" }}
+
+#!/bin/sh
+echo "Instalando paquetes en Linux..."
+
+# Configuración para Linux
 export PATH="$HOME/.linuxbrew/bin:$PATH"
+alias ll='ls -la'
 
 #Install from Brewfile
 brew bundle --file=~/.private/Brewfile
@@ -10,4 +16,10 @@ brew bundle --file=~/.private/Brewfile
 #sudo chsh -s $(which zsh) $USER
 
 #Execute Script Install other applications
-$HOME/.config/install.sh
+$HOME/.scripts/install.sh
+
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+# No hacer nada en Windows (aquí deberías usar un .ps1 mejor)
+{{ end }}
