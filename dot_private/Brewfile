@@ -1,5 +1,3 @@
-tap "homebrew/bundle"
-tap "sdkman/tap"
 brew "binutils"
 brew "chezmoi"
 brew "curl"
