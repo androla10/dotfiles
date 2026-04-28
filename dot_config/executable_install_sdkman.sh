@@ -13,7 +13,7 @@ echo "Instalando SDKMAN...."
 
 TEMP_LOG=$(mktemp "install_sdkman.log.XXXXXX")
 
-#Download and install SDKMAN
+#Download and install SDKMANs
 echo "Download and install SDKMAN"
 { 
 	curl -s "https://get.sdkman.io" | bash > "$TEMP_LOG" 2>&1
