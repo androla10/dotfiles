@@ -16,7 +16,7 @@ TEMP_LOG=$(mktemp "install_sdkman.log.XXXXXX")
 #Download and install SDKMAN
 echo "Download and install SDKMAN"
 { 
-	curl -s "https://get.sdkman.io" | pv -cN download -pte -s 100k | bash > "$TEMP_LOG" 2>&1
+	curl -s "https://get.sdkman.io" | pv -cN download -pte | bash > "$TEMP_LOG" 2>&1
 } || {
 	echo "Hubo un error al descargar e instalar SDKMAN. Consulta el log en $TEM_LOG."
 	exit 1
