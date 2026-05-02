@@ -11,3 +11,8 @@ brew bundle --file=~/.private/Brewfile
 
 #Execute Script Install other applications
 $HOME/.config/install.sh
+
+#Execute Script Install SDKMAN
+sdk install java 17.0.19-tem
+sdk install java 21.0.11-tem
+sdk install maven 3.9.4
