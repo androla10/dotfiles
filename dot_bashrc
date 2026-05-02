@@ -123,3 +123,19 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Set Java and Maven environment variables from SDKMAN candidates (if available)
+if [ -n "$SDKMAN_DIR" ]; then
+    SDKMAN_CANDIDATES_DIR="${SDKMAN_CANDIDATES_DIR:-$SDKMAN_DIR/candidates}"
+    if [ -d "$SDKMAN_CANDIDATES_DIR/java/current" ]; then
+        export JAVA_HOME="$SDKMAN_CANDIDATES_DIR/java/current"
+    fi
+    if [ -d "$SDKMAN_CANDIDATES_DIR/maven/current" ]; then
+        export M2_HOME="$SDKMAN_CANDIDATES_DIR/maven/current"
+        export MAVEN_HOME="$SDKMAN_CANDIDATES_DIR/maven/current"
+    fi
+    # Prepend Java and Maven bin directories to PATH if set
+    [ -n "$JAVA_HOME" ] && PATH="$JAVA_HOME/bin:$PATH"
+    [ -n "$M2_HOME" ] && PATH="$M2_HOME/bin:$PATH"
+    export PATH
+fi
