@@ -29,6 +29,12 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Verificar la instalación de SDKMAN
 if command -v sdk &> /dev/null; then
     echo "SDKMAN! se ha instalado correctamente."
+
+	#Execute Script Install SDKMAN
+	sdk install java 17.0.19-tem
+	sdk install java 21.0.11-tem
+	sdk install maven 3.9.4
+	
     rm "$TEMP_LOG"
 else
     echo "Hubo un error al instalar SDKMAN. Consulta el log en $TEM_LOG."
