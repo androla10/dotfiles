@@ -22,6 +22,7 @@ sync-brew:
 define _install-packages:
 	@echo "Installing packages from Brewfile..."
 	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file=$(HOME)/.private/Brewfile; else echo "Brewfile not found"; fi
+endef
 	
 define _install-executables
 	@echo "Installing executables from install.sh..."
