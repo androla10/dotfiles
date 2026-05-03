@@ -25,5 +25,5 @@ define _install-packages:
 	
 define _install-executables
 	@echo "Installing executables from install.sh..."
-	@if [ -f "$(HOME)/.config/executable_install.sh" ]; then bash $(HOME)/.config/install.sh; else echo "Executable install script not found: $(HOME)/.config/install.sh"; fi
+	@if [ -f "$(HOME)/.config/install.sh" ]; then bash $(HOME)/.config/install.sh; else echo "Executable install script not found: $(HOME)/.config/install.sh"; fi
 endef
