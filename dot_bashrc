@@ -119,6 +119,7 @@ if ! shopt -oq posix; then
 fi
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Load NVM installed by Homebrew (Linuxbrew/Homebrew)
 if command -v brew >/dev/null 2>&1; then
     BREW_NVM_PREFIX="$(brew --prefix nvm 2>/dev/null || true)"
@@ -126,6 +127,15 @@ if command -v brew >/dev/null 2>&1; then
     if [ -n "$BREW_NVM_PREFIX" ] && [ -s "$BREW_NVM_PREFIX/nvm.sh" ]; then
         [ -s "$BREW_NVM_PREFIX/nvm.sh" ] && . "$BREW_NVM_PREFIX/nvm.sh"
         [ -s "$BREW_NVM_PREFIX/etc/bash_completion.d/nvm" ] && . "$BREW_NVM_PREFIX/etc/bash_completion.d/nvm"
+    fi
+fi
+
+# Add make to PATH if installed via Homebrew
+if command -v brew >/dev/null 2>&1; then
+    BREW_MAKE_PREFIX="$(brew --prefix make 2>/dev/null || true)"
+    if [ -n "$BREW_MAKE_PREFIX" ] && [ -x "$BREW_MAKE_PREFIX/bin/make" ]; then
+        PATH="$BREW_MAKE_PREFIX/bin:$PATH"
+        export PATH
     fi
 fi
 
