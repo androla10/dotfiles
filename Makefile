@@ -15,3 +15,7 @@ install:
 build:
 	@echo "Building project..."
 	@echo "No build step configured yet."
+
+sync-brew:
+	@echo "Syncing Brewfile..."
+	brew bundle dump --file=$(HOME)/.private/Brewfile --force
