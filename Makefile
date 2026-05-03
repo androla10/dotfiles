@@ -8,9 +8,9 @@ help:
 
 install:
 	@echo "Installing dotfiles dependencies..."
-	@bash brew bundle --file=~/.private/Brewfile
-	@bash .config/executable_install.sh
-	@bash .config/executable_install_sdkman.sh
+	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file="$(HOME)/.private/Brewfile"; else echo "Brewfile not found"; fi
+	@if [ -f ".config/executable_install.sh" ]; then bash .config/executable_install.sh; fi
+	@if [ -f ".config/executable_install_sdkman.sh" ]; then bash .config/executable_install_sdkman.sh; fi
 
 build:
 	@echo "Building project..."
