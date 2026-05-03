@@ -9,7 +9,7 @@ help:
 install:
 	@echo "Installing dotfiles dependencies..."
 	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file="$(HOME)/.private/Brewfile"; else echo "Brewfile not found"; fi
-	@if [ -f "$(HOME)/.config/executable_install.sh" ]; then bash $(HOME)/.config/executable_install.sh; else echo "Executable install script not found"; fi
+	@if [ -f "$(HOME)/.config/executable_install.sh" ]; then bash $(HOME)/.config/executable_install.sh; else echo "Executable install script not found: $(HOME)/.config/executable_install.sh"; fi
 
 build:
 	@echo "Building project..."
