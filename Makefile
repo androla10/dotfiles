@@ -5,6 +5,7 @@ help:
 	@echo "Available targets:"
 	@echo "  make install  - Install dependencies and setup environment"
 	@echo "  make build    - Build project artifacts"
+	@echo "  make sync-brew - Sync Brewfile with current installed packages"
 
 install:
 	@echo "Installing dotfiles dependencies..."
@@ -19,7 +20,7 @@ sync-brew:
 	@echo "Syncing Brewfile..."
 	brew bundle dump --file=$(HOME)/.private/Brewfile --force
 
-define _install-packages:
+define _install-packages
 	@echo "Installing packages from Brewfile..."
 	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file=$(HOME)/.private/Brewfile; else echo "Brewfile not found"; fi
 endef
