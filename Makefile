@@ -8,8 +8,8 @@ help:
 
 install:
 	@echo "Installing dotfiles dependencies..."
-	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file="$(HOME)/.private/Brewfile"; else echo "Brewfile not found"; fi
-	@if [ -f "$(HOME)/.config/executable_install.sh" ]; then bash $(HOME)/.config/executable_install.sh; else echo "Executable install script not found: $(HOME)/.config/executable_install.sh"; fi
+	$(call _install-packages)
+	$(call _install-executables)
 
 build:
 	@echo "Building project..."
@@ -18,3 +18,12 @@ build:
 sync-brew:
 	@echo "Syncing Brewfile..."
 	brew bundle dump --file=$(HOME)/.private/Brewfile --force
+
+define _install-packages:
+	@echo "Installing packages from Brewfile..."
+	@if [ -f "$(HOME)/.private/Brewfile" ]; then brew bundle --file=$(HOME)/.private/Brewfile; else echo "Brewfile not found"; fi
+	
+define _install-executables
+	@echo "Installing executables from install.sh..."
+	@if [ -f "$(HOME)/.config/executable_install.sh" ]; then bash $(HOME)/.config/install.sh; else echo "Executable install script not found: $(HOME)/.config/install.sh"; fi
+endef
