@@ -1,7 +1,7 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $name  := promptStringOnce . "name" "User Name" -}}
 {{- $default := output "hostname" -}}
-{{- $hostName := promptStringOnce . "" (printf "Host Name (default: %s)" $default) -}}
+{{- $hostName := promptStringOnce . "hostName" (printf "Host Name (default: %s)" $default) -}}
 
 {{- if eq (trim $hostName) "" -}}
 {{- fail (printf "Debes ingresar un Host Name (sugerido: %s)" $default) -}}
