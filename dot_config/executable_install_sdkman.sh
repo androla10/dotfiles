@@ -2,6 +2,7 @@
 
 set e
 
+echo "{{ .hostName }}: Configurando SDKMAN!..."
 
 #Check if sdkman is installed
 if command -v sdk &> /dev/null; then

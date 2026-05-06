@@ -1,8 +1,17 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $name  := promptStringOnce . "name" "User Name" -}}
+{{- $default := output "hostname" -}}
+{{- $hostName := promptStringOnce . "" (printf "Host Name (default: %s)" $default) -}}
+
+{{- if eq (trim $hostName) "" -}}
+{{- fail (printf "Debes ingresar un Host Name (sugerido: %s)" $default) -}}
+{{- end -}}
+
+{{- $_ := setValueAtPath . "hostName" $hostName -}}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
+    hostName = {{ $hostName | quote }}
 [scriptEnv]
     HOMEBREW_BUNDLE_FILE = "~/.private/Brewfile"
