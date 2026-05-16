@@ -7,8 +7,6 @@
 {{- fail (printf "Debes ingresar un Host Name (sugerido: %s)" $default) -}}
 {{- end -}}
 
-{{- $_ := setValueAtPath . "hostName" $hostName -}}
-
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
