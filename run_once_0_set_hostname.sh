@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-HOSTNAME="{{ .hostName }}"
+#HOSTNAME="{{ .hostName }}"
 
-echo "Cambiando hostname a $HOSTNAME..."
+#echo "Cambiando hostname a $HOSTNAME..."
 #hostnamectl set-hostname "$HOSTNAME"
