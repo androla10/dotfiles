@@ -7,5 +7,5 @@ export PATH="$HOME/.linuxbrew/bin:$PATH"
 #sudo chsh -s $(which zsh) $USER
 
 #Execute Script Install other applications
-make install
+make -C ~/.private install
 #$HOME/.config/install.sh
