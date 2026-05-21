@@ -11,7 +11,7 @@ install:
 	@echo "Installing dotfiles dependencies..."
 	$(call _install-packages)
 	$(call _install-executables)
-	source ~/.bashrc
+	@bash -lc 'source "$(HOME)/.bashrc"'
 
 build:
 	@echo "Building project..."
