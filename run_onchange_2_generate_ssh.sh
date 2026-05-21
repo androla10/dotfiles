@@ -10,8 +10,8 @@ echo "🔐 Verificando sesión de Bitwarden..."
 
 if ! bw unlock --check >/dev/null 2>&1; then
   bw login
-  export BW_SESSION=$(bw unlock --raw)
 fi
+export BW_SESSION=$(bw unlock --raw)
 
 echo "🔑 Verificando si ya existe passphrase en Bitwarden..."
 
@@ -23,7 +23,8 @@ if [ -z "$PASS" ]; then
 
   echo "💾 Guardando passphrase en Bitwarden..."
 
-  bw create item "$(jq -n \
+  tmp=$(mktemp)
+  jq -n \
     --arg name "$ITEM_NAME" \
     --arg pass "$PASS" \
     '{
@@ -33,8 +34,9 @@ if [ -z "$PASS" ]; then
         username: "ssh",
         password: $pass
       }
-    }'
-  )"
+    }' > "$tmp"
+  bw create item "$(cat "$tmp")"
+  rm -f "$tmp"
 else
   echo "✅ Passphrase ya existe"
 fi
