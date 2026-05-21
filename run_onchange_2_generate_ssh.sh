@@ -8,10 +8,13 @@ KEY_PATH="$HOME/.ssh/id_ed25519_personal"
 
 echo "🔐 Verificando sesión de Bitwarden..."
 
-if ! bw unlock --check >/dev/null 2>&1; then
+BW_SESSION=$(bw unlock --raw 2>/dev/null || true)
+if [ -z "$BW_SESSION" ]; then
+  echo "🔐 No hay sesión activa de Bitwarden. Iniciando login interactivo..."
   bw login
+  BW_SESSION=$(bw unlock --raw)
 fi
-export BW_SESSION=$(bw unlock --raw)
+export BW_SESSION
 
 echo "🔑 Verificando si ya existe passphrase en Bitwarden..."
 
