@@ -3,7 +3,11 @@
 
 # Alias útiles
 Set-Alias ll Get-ChildItem
-Set-Alias gs git status
+
+$gitAliasesPath = Join-Path $PSScriptRoot 'git_aliases.ps1'
+if (Test-Path $gitAliasesPath) {
+	. $gitAliasesPath
+}
 
 # Variables de entorno
 $env:EDITOR = "nvim"
