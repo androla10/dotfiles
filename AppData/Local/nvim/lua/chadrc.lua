@@ -6,7 +6,8 @@
 local M = {}
 
 M.base46 = {
-	theme = "onedark",
+	theme = "solarized_dark",
+  transparency = false,
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -14,11 +15,22 @@ M.base46 = {
 	-- },
 }
 
--- M.nvdash = { load_on_startup = true }
--- M.ui = {
---       tabufline = {
---          lazyload = false
---      }
--- }
+M.nvdash = { 
+  load_on_startup = true,
+  header = {
+    " _____  _____  ____   _____  _____ ",
+    "|__   //   __\\/  _/  /   __\\/  _  \\",
+    " /  _/ |   __||  |---|   __||  _  <",
+    "/_____|\\_____/\\_____/\\_____/\\__|\\_/",
+    "                                        ",
+    "                                        ",
+  }
+
+}
+M.ui = {
+       tabufline = {
+          lazyload = false
+      }
+}
 
 return M
