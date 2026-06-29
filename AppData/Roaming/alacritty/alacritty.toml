@@ -1,0 +1,91 @@
+# Configuración de ventana
+[window]
+# Tamaño inicial de la ventana (columnas x filas)
+dimensions = { columns = 120, lines = 30 }
+
+# Espaciado alrededor del contenido
+padding = { x = 10, y = 10 }
+
+# Opacidad de la ventana (0.0 = transparente, 1.0 = opaco)
+opacity = 0.85
+
+# Decoraciones de ventana
+decorations = "Full"
+
+# Modo de inicio
+startup_mode = "Windowed"
+
+# Configuración de fuentes
+[font]
+# Fuente principal
+normal = { family = "RobotoMono Nerd Font", style = "Regular" }
+bold = { family = "RobotoMono Nerd Font", style = "Bold" }
+italic = { family = "RobotoMono Nerd Font", style = "Italic" }
+bold_italic = { family = "RobotoMono Nerd Font", style = "Bold Italic" }
+
+# Tamaño de fuente
+size = 12.0
+
+# Configuración del cursor
+[cursor]
+# Estilo del cursor
+style = { shape = "Block", blinking = "On" }
+
+# Configuración de colores
+[colors.primary]
+background = "#1d1f21"
+foreground = "#c5c8c6"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "CellForeground"
+
+[colors.normal]
+black = "#1d1f21"
+red = "#cc6666"
+green = "#b5bd68"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b294bb"
+cyan = "#8abeb7"
+white = "#c5c8c6"
+
+[colors.bright]
+black = "#666666"
+red = "#d54e53"
+green = "#b9ca4a"
+yellow = "#e7c547"
+blue = "#7aa6da"
+magenta = "#c397d8"
+cyan = "#70c0b1"
+white = "#eaeaea"
+
+# Configuración de teclado
+[keyboard]
+bindings = [
+  # Copiar y pegar
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+
+  # Control de fuente
+  { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "Key0", mods = "Control", action = "ResetFontSize" },
+
+  # Nueva ventana
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+
+  # Navegación
+  { key = "PageUp", mods = "Shift", action = "ScrollPageUp" },
+  { key = "PageDown", mods = "Shift", action = "ScrollPageDown" },
+  { key = "Home", mods = "Shift", action = "ScrollToTop" },
+  { key = "End", mods = "Shift", action = "ScrollToBottom" },
+]
+
+# Configuración de desplazamiento
+[scrolling]
+history = 10000
+
+# Configuración de selección
+[selection]
+save_to_clipboard = true
