@@ -1,3 +1,7 @@
+[terminal]
+# Set the default shell to PowerShell 7 (Recommended)
+shell = { program = "pwsh.exe", args = ["-NoLogo"] }
+
 # Configuración de ventana
 [window]
 # Tamaño inicial de la ventana (columnas x filas)
