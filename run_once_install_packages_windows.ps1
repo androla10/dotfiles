@@ -10,5 +10,8 @@ winget install -e --id Alacritty.Alacritty --source winget
 # Install Notepad++
 winget install -e --id Notepad++.Notepad++ --source winget
 
+# Install Ripgrep
+winget install -e --id BurntSushi.ripgrep.MSVC --source winget
+
 # Instalamos NvChad
 git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim; nvim
