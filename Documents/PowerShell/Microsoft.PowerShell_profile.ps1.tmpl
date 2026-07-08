@@ -1,9 +1,26 @@
 {{ if eq .chezmoi.os "windows" }}
 # Perfil de PowerShell personalizado para Windows
 
+# Default Methods.
+function GoToWork {
+    Set-Location -Path "C:\Projects\MyWork"
+}
+
 # Alias útiles
 Set-Alias ll Get-ChildItem
 
 # Variables de entorno
 $env:EDITOR = "nvim"
+
+if (-not $env:ZELLIJ) {
+	GoToWork
+    zellij
+}
+
+# Forzar UTF-8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+# Habilitar secuencias ANSI si no están activas
+$env:TERM = "xterm-256color"
+
 {{ end }}

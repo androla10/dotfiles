@@ -13,5 +13,8 @@ winget install -e --id Notepad++.Notepad++ --source winget
 # Install Ripgrep
 winget install -e --id BurntSushi.ripgrep.MSVC --source winget
 
+# Install Zellij
+winget install -e --id arndawg.zellij-windows --source winget
+
 # Instalamos NvChad
 git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim; nvim
