@@ -1,9 +1,24 @@
 {{ if eq .chezmoi.os "windows" }}
 # Perfil de PowerShell personalizado para Windows
+# Ruta deseada
+$path = "C:\projects\mywork"
 
 # Default Methods.
 function GoToWork {
-    Set-Location -Path "C:\Projects\MyWork"
+    try {
+        # Verificar si la carpeta existe
+        if (-not (Test-Path -Path $path -PathType Container)) {
+            # Crear carpeta si no existe
+            New-Item -Path $path -ItemType Directory -Force | Out-Null
+            Write-Host "Directorio creado: $path"
+        }
+
+        # Cambiar ubicación
+        Set-Location -Path $path
+    }
+    catch {
+        Write-Error "Error al crear o cambiar de directorio: $_"
+    }
 }
 
 # Alias útiles
@@ -22,5 +37,6 @@ if (-not $env:ZELLIJ) {
 
 # Habilitar secuencias ANSI si no están activas
 $env:TERM = "xterm-256color"
+
 
 {{ end }}
