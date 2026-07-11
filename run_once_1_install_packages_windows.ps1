@@ -18,6 +18,7 @@ winget install -e --id arndawg.zellij-windows --source winget
 
 # Install Vfox
 winget install vfox --source winget
+if (-not (Test-Path -Path $PROFILE)) { New-Item -Type File -Path $PROFILE -Force }; Add-Content -Path $PROFILE -Value 'Invoke-Expression "$(vfox activate pwsh)"'
 
 # Install NvChad
 git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim;
