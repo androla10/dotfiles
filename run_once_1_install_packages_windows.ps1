@@ -23,8 +23,4 @@ winget install vfox --source winget
 #git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim;
 & (Join-Path $chezmoiSource "scripts\install-nvchad.ps1")
 
-# Refresh the environment variables to include the new installations
-$env:Path = (
-    [Environment]::GetEnvironmentVariable("Path", "Machine"),
-    [Environment]::GetEnvironmentVariable("Path", "User")
-) -join ";"
+& (Join-Path $chezmoiSource "scripts\refresh-env.ps1")

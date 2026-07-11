@@ -46,5 +46,8 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "Maven instalado correctamente." -ForegroundColor Green
 Write-Host ""
 
+# Actualizar el entorno para reflejar los cambios
+& (Join-Path $chezmoiSource "scripts\refresh-env.ps1")
+
 # Mostrar versión instalada
 mvn -version
