@@ -1,4 +1,4 @@
-
+{{ if eq .chezmoi.os "windows" }}
 # Perfil de PowerShell personalizado para Windows
 # Ruta deseada
 $path = "C:\projects\mywork"
@@ -39,3 +39,4 @@ if (-not $env:ZELLIJ) {
 $env:TERM = "xterm-256color"
 
 
+{{ end }}
