@@ -1,5 +1,7 @@
-# install-maven.ps1
+$chezmoiSource = (chezmoi source-path)
+Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
 
+# install-maven.ps1
 $ErrorActionPreference = "Stop"
 
 # ========================================
@@ -47,7 +49,7 @@ Write-Host "Maven instalado correctamente." -ForegroundColor Green
 Write-Host ""
 
 # Actualizar el entorno para reflejar los cambios
-& (Join-Path $chezmoiSource "scripts\refresh-env.ps1")
+& "$chezmoiSource\scripts\refresh-env.ps1"
 
 # Mostrar versión instalada
 mvn -version

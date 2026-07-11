@@ -1,3 +1,6 @@
+$chezmoiSource = (chezmoi source-path)
+Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
+
 # Install NeoVim
 winget install -e --id Neovim.Neovim --source winget
 
@@ -21,6 +24,7 @@ winget install vfox --source winget
 
 # Install NvChad
 #git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim;
-& (Join-Path $chezmoiSource "scripts\install-nvchad.ps1")
+& "$chezmoiSource\scripts\install-nvchad.ps1"
 
-& (Join-Path $chezmoiSource "scripts\refresh-env.ps1")
+# Refresh environment variables
+& "$chezmoiSource\scripts\refresh-env.ps1"
