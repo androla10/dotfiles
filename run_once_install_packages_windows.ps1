@@ -16,5 +16,8 @@ winget install -e --id BurntSushi.ripgrep.MSVC --source winget
 # Install Zellij
 winget install -e --id arndawg.zellij-windows --source winget
 
-# Instalamos NvChad
-git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim; nvim
+# Install Vfox
+winget install vfox --source winget
+
+# Install NvChad
+git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim;
