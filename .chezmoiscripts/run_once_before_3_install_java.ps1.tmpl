@@ -42,7 +42,7 @@ else {
 
 # Establecer version global
 Write-Host "Configurando Java $javaVersion como version global..." -ForegroundColor Yellow
-vfox use --global java@$javaVersion
+#vfox use --global java@$javaVersion
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
@@ -53,5 +53,5 @@ Write-Host ""
 & "$chezmoiSource\scripts\refresh-env.ps1"
 
 # Mostrar version instalada
-java -version
-javac -version
+#java -version
+#javac -version

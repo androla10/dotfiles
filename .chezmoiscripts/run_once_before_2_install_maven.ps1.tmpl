@@ -42,7 +42,7 @@ else {
 
 # Establecer versión global
 Write-Host "Configurando Maven $mavenVersion como versión global..." -ForegroundColor Yellow
-vfox use --global maven@$mavenVersion
+#vfox use --global maven@$mavenVersion
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
@@ -53,4 +53,4 @@ Write-Host ""
 & "$chezmoiSource\scripts\refresh-env.ps1"
 
 # Mostrar versión instalada
-mvn -version
+#mvn -version
