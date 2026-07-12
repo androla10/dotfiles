@@ -1,4 +1,4 @@
-$chezmoiSource = (chezmoi source-path)
+$chezmoiSource = "{{ .chezmoi.sourceDir }}"
 Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
 Write-Host "chezmoi root path: $PSScriptRoot" -ForegroundColor Cyan
 
@@ -8,9 +8,9 @@ $ErrorActionPreference = "Stop"
 # ========================================
 # Configuración
 # ========================================
-$mavenVersion = "3.9.11"
+$mavenVersion = "3.9.16"
 
-Write-Host "========== Instalación de Maven ==========" -ForegroundColor Cyan
+Write-Host "========== Instalacion de Maven ==========" -ForegroundColor Cyan
 
 # Verificar que vfox exista
 if (-not (Get-Command vfox -ErrorAction SilentlyContinue)) {
@@ -19,7 +19,7 @@ if (-not (Get-Command vfox -ErrorAction SilentlyContinue)) {
 }
 
 # Verificar si el plugin de Maven existe
-$plugins = vfox plugin list
+$plugins = vfox available
 
 if ($plugins -notmatch "maven") {
     Write-Host "Instalando plugin Maven..." -ForegroundColor Yellow
@@ -50,7 +50,7 @@ Write-Host "Maven instalado correctamente." -ForegroundColor Green
 Write-Host ""
 
 # Actualizar el entorno para reflejar los cambios
-& "$PSScriptRoot\scripts\refresh-env.ps1"
+& "$chezmoiSource\scripts\refresh-env.ps1"
 
 # Mostrar versión instalada
 mvn -version

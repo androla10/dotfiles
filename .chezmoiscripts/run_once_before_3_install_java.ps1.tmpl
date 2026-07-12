@@ -1,0 +1,57 @@
+$chezmoiSource = "{{ .chezmoi.sourceDir }}"
+Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
+Write-Host "chezmoi root path: $PSScriptRoot" -ForegroundColor Cyan
+
+# install-java.ps1
+$ErrorActionPreference = "Stop"
+
+# ========================================
+# Configuracion
+# ========================================
+$javaVersion = "21.0.8"
+
+Write-Host "========== Instalacion de Java ==========" -ForegroundColor Cyan
+
+# Verificar que vfox exista
+if (-not (Get-Command vfox -ErrorAction SilentlyContinue)) {
+    Write-Error "vfox no esta instalado o no se encuentra en el PATH."
+    exit 1
+}
+
+# Verificar si el plugin de Java existe
+$plugins = vfox available
+
+if ($plugins -notmatch "java") {
+    Write-Host "Instalando plugin Java..." -ForegroundColor Yellow
+    vfox add java
+}
+else {
+    Write-Host "Plugin Java ya instalado." -ForegroundColor Green
+}
+
+# Verificar si la version ya esta instalada
+$installedVersions = vfox list java
+
+if ($installedVersions -match [regex]::Escape($javaVersion)) {
+    Write-Host "Java $javaVersion ya esta instalado." -ForegroundColor Green
+}
+else {
+    Write-Host "Instalando Java $javaVersion..." -ForegroundColor Yellow
+    vfox install java@$javaVersion
+}
+
+# Establecer version global
+Write-Host "Configurando Java $javaVersion como version global..." -ForegroundColor Yellow
+vfox use --global java@$javaVersion
+
+Write-Host ""
+Write-Host "==========================================" -ForegroundColor Cyan
+Write-Host "Java instalado correctamente." -ForegroundColor Green
+Write-Host ""
+
+# Actualizar el entorno para reflejar los cambios
+& "$chezmoiSource\scripts\refresh-env.ps1"
+
+# Mostrar version instalada
+java -version
+javac -version
