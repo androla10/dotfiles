@@ -10,39 +10,62 @@ $ErrorActionPreference = "Stop"
 # ========================================
 $javaVersion = "21.0.11+10-tem"
 
+function Get-VfoxCommand {
+    $command = Get-Command vfox -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $candidatePaths = @(
+        (Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Links\vfox.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\vfox\vfox.exe"),
+        (Join-Path $env:ProgramFiles "vfox\vfox.exe")
+    )
+
+    foreach ($candidatePath in $candidatePaths) {
+        if ($candidatePath -and (Test-Path $candidatePath)) {
+            return $candidatePath
+        }
+    }
+
+    return $null
+}
+
+$vfoxCommand = Get-VfoxCommand
+
 Write-Host "========== Instalacion de Jav4 ==========" -ForegroundColor Cyan
 
 # Verificar que vfox exista
-if (-not (Get-Command vfox -ErrorAction SilentlyContinue)) {
-    Write-Error "vfox no esta instalado o no se encuentra en el PATH."
+if (-not $vfoxCommand) {
+    Write-Error "vfox no esta instalado o no se encuentra en el PATH o en una ruta conocida."
     exit 1
 }
 
 # Verificar si el plugin de Java existe
-$plugins = vfox available
+$plugins = & $vfoxCommand available
 
 if ($plugins -notmatch "java") {
     Write-Host "Instalando plugin Java..." -ForegroundColor Yellow
-    vfox add java
+    & $vfoxCommand add java
 }
 else {
     Write-Host "Plugin Java ya instalado." -ForegroundColor Green
 }
 
 # Verificar si la version ya esta instalada
-$installedVersions = vfox list java
+$installedVersions = & $vfoxCommand list java
 
 if ($installedVersions -match [regex]::Escape($javaVersion)) {
     Write-Host "Java $javaVersion ya esta instalado." -ForegroundColor Green
 }
 else {
     Write-Host "Instalando Java $javaVersion..." -ForegroundColor Yellow
-    vfox install java@$javaVersion
+    & $vfoxCommand install java@$javaVersion
 }
 
 # Establecer version global
 Write-Host "Configurando Java $javaVersion como version global..." -ForegroundColor Yellow
-#vfox use --global java@$javaVersion
+#& $vfoxCommand use --global java@$javaVersion
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan

@@ -10,39 +10,62 @@ $ErrorActionPreference = "Stop"
 # ========================================
 $mavenVersion = "3.9.16"
 
+function Get-VfoxCommand {
+    $command = Get-Command vfox -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $candidatePaths = @(
+        (Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Links\vfox.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\vfox\vfox.exe"),
+        (Join-Path $env:ProgramFiles "vfox\vfox.exe")
+    )
+
+    foreach ($candidatePath in $candidatePaths) {
+        if ($candidatePath -and (Test-Path $candidatePath)) {
+            return $candidatePath
+        }
+    }
+
+    return $null
+}
+
+$vfoxCommand = Get-VfoxCommand
+
 Write-Host "========== Instalacion de Maven ==========" -ForegroundColor Cyan
 
 # Verificar que vfox exista
-if (-not (Get-Command vfox -ErrorAction SilentlyContinue)) {
-    Write-Error "vfox no está instalado o no se encuentra en el PATH."
+if (-not $vfoxCommand) {
+    Write-Error "vfox no está instalado o no se encuentra en el PATH o en una ruta conocida."
     exit 1
 }
 
 # Verificar si el plugin de Maven existe
-$plugins = vfox available
+$plugins = & $vfoxCommand available
 
 if ($plugins -notmatch "maven") {
     Write-Host "Instalando plugin Maven..." -ForegroundColor Yellow
-    vfox add maven
+    & $vfoxCommand add maven
 }
 else {
     Write-Host "Plugin Maven ya instalado." -ForegroundColor Green
 }
 
 # Verificar si la versión ya está instalada
-$installedVersions = vfox list maven
+$installedVersions = & $vfoxCommand list maven
 
 if ($installedVersions -match $mavenVersion) {
     Write-Host "Maven $mavenVersion ya está instalado." -ForegroundColor Green
 }
 else {
     Write-Host "Instalando Maven $mavenVersion..." -ForegroundColor Yellow
-    vfox install maven@$mavenVersion
+    & $vfoxCommand install maven@$mavenVersion
 }
 
 # Establecer versión global
 Write-Host "Configurando Maven $mavenVersion como versión global..." -ForegroundColor Yellow
-#vfox use --global maven@$mavenVersion
+#& $vfoxCommand use --global maven@$mavenVersion
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
