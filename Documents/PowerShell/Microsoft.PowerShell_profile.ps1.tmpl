@@ -27,9 +27,11 @@ Set-Alias ll Get-ChildItem
 # Variables de entorno
 $env:EDITOR = "nvim"
 
+# Create new folder for my projects
+GoToWork
+
 if (-not $env:ZELLIJ) {
-	#GoToWork
-    zellij
+	zellij
 }
 
 # Forzar UTF-8
