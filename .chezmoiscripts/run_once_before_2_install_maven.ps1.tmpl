@@ -65,7 +65,7 @@ else {
 
 # Establecer versión global
 Write-Host "Configurando Maven $mavenVersion como versión global..." -ForegroundColor Yellow
-#& $vfoxCommand use --global maven@$mavenVersion
+Write-Host "vfox use --global maven@$mavenVersion" -ForegroundColor Cyan
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
