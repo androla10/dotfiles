@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 # ========================================
 # Configuración
 # ========================================
-$mavenVersion = "3.9.16"
+$mavenVersion = "{{ index (index .vfox.versions .machine.type) \"maven\" }}"
 
 function Get-VfoxCommand {
     $command = Get-Command vfox -ErrorAction SilentlyContinue
