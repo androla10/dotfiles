@@ -1,6 +1,11 @@
+{{- $choices := list "personal" "work" -}}
+{{- $machineType := promptChoiceOnce . "machine.type" "Machine type" $choices -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $name  := promptStringOnce . "name" "User Name" -}}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
+
+[data.machine]
+    type = {{ $machineType | quote }}
