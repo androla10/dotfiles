@@ -15,6 +15,10 @@ function GoToWork {
 
         # Cambiar ubicación
         Set-Location -Path $path
+
+        if (-not $env:ZELLIJ) {
+	        zellij
+        }
     }
     catch {
         Write-Error "Error al crear o cambiar de directorio: $_"
@@ -26,10 +30,6 @@ Set-Alias ll Get-ChildItem
 
 # Variables de entorno
 $env:EDITOR = "nvim"
-
-if (-not $env:ZELLIJ) {
-	zellij
-}
 
 # Forzar UTF-8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
