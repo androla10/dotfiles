@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 # ========================================
 # Configuracion
 # ========================================
-$javaVersion = "21.0.11+10-tem"
+$javaVersion = "{{ index (index .vfox.versions .machine.type) "java" }}"
 
 function Get-VfoxCommand {
     $command = Get-Command vfox -ErrorAction SilentlyContinue
