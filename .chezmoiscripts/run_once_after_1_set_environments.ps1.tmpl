@@ -2,7 +2,9 @@ $chezmoiSource = "{{ .chezmoi.sourceDir }}"
 Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
 Write-Host "chezmoi root path: $PSScriptRoot" -ForegroundColor Cyan
 
-Invoke-Expression "$(vfox activate pwsh)"
+. $PROFILE
+
+#Invoke-Expression "$(vfox activate pwsh)"
 
 Write-Host "Configure environments" -ForegroundColor Cyan
 vfox use --global java@{{ index (index .vfox.versions .machine.type) "java" }}
