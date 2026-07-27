@@ -37,6 +37,33 @@ $env:EDITOR = "nvim"
 # Habilitar secuencias ANSI si no están activas
 $env:TERM = "xterm-256color"
 
-Invoke-Expression "$(vfox activate pwsh)"
+function Get-VfoxCommand {
+    $command = Get-Command vfox -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $candidatePaths = @(
+        (Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Links\vfox.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\vfox\vfox.exe"),
+        (Join-Path $env:ProgramFiles "vfox\vfox.exe")
+    )
+
+    foreach ($candidatePath in $candidatePaths) {
+        if ($candidatePath -and (Test-Path $candidatePath)) {
+            return $candidatePath
+        }
+    }
+
+    return $null
+}
+
+$vfoxCommand = Get-VfoxCommand
+if ($vfoxCommand) {
+    $vfoxActivation = & $vfoxCommand activate pwsh
+    if ($vfoxActivation) {
+        Invoke-Expression $vfoxActivation
+    }
+}
 
 {{ end }}
