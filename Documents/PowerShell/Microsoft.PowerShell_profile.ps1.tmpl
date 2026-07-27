@@ -62,7 +62,7 @@ $vfoxCommand = Get-VfoxCommand
 if ($vfoxCommand) {
     $vfoxActivation = & $vfoxCommand activate pwsh
     if ($vfoxActivation) {
-        Invoke-Expression $vfoxActivation
+        #Invoke-Expression $vfoxActivation
     }
 }
 
