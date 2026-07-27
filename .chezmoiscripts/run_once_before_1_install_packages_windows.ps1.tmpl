@@ -4,6 +4,27 @@ $chezmoiSource = "{{ .chezmoi.sourceDir }}"
 #Imports Utils.
 . (Join-Path $chezmoiSource "scripts\utils.ps1")
 
+function Get-VfoxCommand {
+    $command = Get-Command vfox -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $candidatePaths = @(
+        (Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Links\vfox.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\vfox\vfox.exe"),
+        (Join-Path $env:ProgramFiles "vfox\vfox.exe")
+    )
+
+    foreach ($candidatePath in $candidatePaths) {
+        if ($candidatePath -and (Test-Path $candidatePath)) {
+            return $candidatePath
+        }
+    }
+
+    return $null
+}
+
 Write-Host "chezmoi source path: $chezmoiSource" -ForegroundColor Cyan
 Write-Host "chezmoi root path: $PSScriptRoot" -ForegroundColor Cyan
 
@@ -28,10 +49,21 @@ winget install -e --id arndawg.zellij-windows --source winget
 # Install Vfox
 winget install vfox --source winget
 
+# Refresh Vfox actual path after installation
+$vfoxCommand = Get-VfoxCommand
+
 # Install NvChad
 & "$chezmoiSource\scripts\install-nvchad.ps1"
 
 # Refresh environment variables
 & "$chezmoiSource\scripts\refresh-env.ps1"
+
+# Refresh Vfox actual path
+if ($vfoxCommand) {
+    $vfoxActivation = & $vfoxCommand activate pwsh
+    if ($vfoxActivation) {
+        Invoke-Expression $vfoxActivation
+    }
+}
 
 {{ end }}
